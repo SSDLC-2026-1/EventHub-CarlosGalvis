@@ -104,16 +104,16 @@ def validate_card_number(card_number: str) -> Tuple[str, str]:
     str_spaces_removed = str_normalized.replace(" ", "").replace("-", "")
 
     if not CARD_DIGITS_RE.match(str_spaces_removed):
-        return "", "El numero de tarjeta debe contener solo digitos"
+        return "", "The card number must contain digits only"
     if not (13 <= len(str_spaces_removed) <= 19):
-        return "", "El numero de tarjeta debe tener entre 13 y 19 digitos"
+        return "", "The card number must be between 13 and 19 digits long   "
         
     # Optional Luhn check
     if not luhn_is_valid(str_spaces_removed):
-        return "", "El numero de tarjeta no es valido segun el algoritmo de Luhn"
+        return "", "The card number is not valid according to the Luhn algorithm"
 
     # TODO: Implement validation
-    return "", ""
+    return str_spaces_removed, ""
 
 
 def validate_exp_date(exp_date: str) -> Tuple[str, str]:
