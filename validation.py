@@ -187,7 +187,7 @@ def validate_cvv(cvv: str) -> Tuple[str, str]:
     #Should NOT return the CVV value for storage
 
 
-    return "", "    "
+    return "", "   "
 
 
 def validate_billing_email(billing_email: str) -> Tuple[str, str]:
