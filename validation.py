@@ -71,7 +71,7 @@ def luhn_is_valid(number: str) -> bool:
                 n -= 9
         total += n
     return total % 10 == 0
-    
+
     pass
 
 
@@ -100,6 +100,18 @@ def validate_card_number(card_number: str) -> Tuple[str, str]:
         - If invalid → return ("", "Error message")
         - If valid → return (all credit card digits, "")
     """
+    str_normalized = normalize_basic(card_number)
+    str_spaces_removed = str_normalized.replace(" ", "").replace("-", "")
+
+    if not CARD_DIGITS_RE.match(str_spaces_removed):
+        return "", "El numero de tarjeta debe contener solo digitos"
+    if not (13 <= len(str_spaces_removed) <= 19):
+        return "", "El numero de tarjeta debe tener entre 13 y 19 digitos"
+        
+    # Optional Luhn check
+    if not luhn_is_valid(str_spaces_removed):
+        return "", "El numero de tarjeta no es valido segun el algoritmo de Luhn"
+
     # TODO: Implement validation
     return "", ""
 
@@ -195,8 +207,15 @@ def validate_billing_email(billing_email: str) -> Tuple[str, str]:
     Returns:
         (normalized_email, error_message)
     """
+
+    normalized_email = normalize_basic(billing_email).lower()
+    if len(normalized_email) > 254:
+        return "", "Email must be at most 254 characters long"
+    if not EMAIL_BASIC_RE.match(normalized_email):
+        return "", "Email format is invalid"
+
     # TODO: Implement validation
-    return "", ""
+    return normalized_email, ""
 
 
 def validate_name_on_card(name_on_card: str) -> Tuple[str, str]:
