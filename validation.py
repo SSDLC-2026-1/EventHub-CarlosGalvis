@@ -131,8 +131,9 @@ def validate_exp_date(exp_date: str) -> Tuple[str, str]:
     if int(year) < current_year or (int(year) == current_year and int(month) < current_month):
         return "", "Card is expired"
     
-    # TODO: Implement validation
-    return "", ""
+    normalized_exp_date = f"{month:02d}/{year:02d}"
+    
+    return normalized_exp_date, ""
 
 
 def validate_cvv(cvv: str) -> Tuple[str, str]:
@@ -140,9 +141,8 @@ def validate_cvv(cvv: str) -> Tuple[str, str]:
     Validate CVV.
 
     Requirements:
-    - Must contain only digits
-    - Must be exactly 3 or 4 digits
-    - Should NOT return the CVV value for storage
+    - 
+    - 
 
     Input:
         cvv (str)
@@ -151,8 +151,18 @@ def validate_cvv(cvv: str) -> Tuple[str, str]:
         ("", error_message)
         (always return empty clean value for security reasons)
     """
-    # TODO: Implement validation
-    return "", ""
+
+    #Must contain only digits
+    if not cvv.isdigit():
+        return "", "CVV must contain digits only"
+    #Must be exactly 3 or 4 digits
+    if len(cvv) not in [3, 4]:
+        return "", "CVV must be 3 or 4 digits long"
+    
+    #Should NOT return the CVV value for storage
+
+
+    return "", "    "
 
 
 def validate_billing_email(billing_email: str) -> Tuple[str, str]:
