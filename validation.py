@@ -158,7 +158,7 @@ def validate_exp_date(exp_date: str) -> Tuple[str, str]:
     if int(year) < current_year or (int(year) == current_year and int(month) < current_month):
         return "", "Card is expired"
     
-    normalized_exp_date = f"{month:02d}/{year:02d}"
+    normalized_exp_date = f"{month}/{year}"
     
     return normalized_exp_date, ""
 
