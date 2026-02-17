@@ -29,7 +29,7 @@ CARD_DIGITS_RE = re.compile(r"^\d+$")     # digits only
 CVV_RE = re.compile(r"^\d{3,4}$")             # 3 or 4 digits
 EXP_RE = re.compile(r"^(0[1-9]|1[0-2])\/\d{2}$")             # MM/YY format
 EMAIL_BASIC_RE = re.compile(r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$")     # basic email structure
-NAME_ALLOWED_RE = re.compile(r"^[a-zA-Z\s'\-]+$")    # allowed name characters
+NAME_ALLOWED_RE = re.compile(r"^[a-zA-ZáéíóúñÁÉÍÓÚÑ\s'\-]+$")    # allowed name characters with accents
 
 
 # =============================
