@@ -140,9 +140,11 @@ def validate_exp_date(exp_date: str) -> Tuple[str, str]:
         return "", "Expiration date is required"
     
     exp_date = exp_date.strip()
-
+    """
+    CVV_RE = re.compile(r"^\d{3,4}$")             # 3 or 4 digits
+    """
     #Fomat check
-    if not re.fullmatch(r"\d{2}/\d{2}", exp_date):
+    if not EXP_RE.match(exp_date):
         return "", "Expiration date must be in MM/YY format"
     
     #month betwen 01 and 12
@@ -181,8 +183,8 @@ def validate_cvv(cvv: str) -> Tuple[str, str]:
     if not cvv.isdigit():
         return "", "CVV must contain digits only"
     #Must be exactly 3 or 4 digits
-    if len(cvv) not in [3, 4]:
-        return "", "CVV must be 3 or 4 digits long"
+    if not CVV_RE.match(cvv):
+        return "", "CVV must be 3 or 4 digits"
     
     #Should NOT return the CVV value for storage
 
