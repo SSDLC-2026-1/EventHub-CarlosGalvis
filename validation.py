@@ -58,7 +58,20 @@ def luhn_is_valid(number: str) -> bool:
         True if valid according to Luhn algorithm
         False otherwise
     """
-    # TODO: Implement Luhn algorithm
+    if not number.isdigit():
+        return False
+    
+    total = 0
+    reverse = number[::-1]
+    for i, digito in enumerate(reverse):
+        n = int(digito)
+        if i % 2 == 1:
+            n *= 2
+            if n > 9:
+                n -= 9
+        total += n
+    return total % 10 == 0
+    
     pass
 
 
