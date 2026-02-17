@@ -189,7 +189,7 @@ def validate_cvv(cvv: str) -> Tuple[str, str]:
     #Should NOT return the CVV value for storage
 
 
-    return "", "   "
+    return "", ""
 
 
 def validate_billing_email(billing_email: str) -> Tuple[str, str]:
@@ -223,7 +223,7 @@ def validate_name_on_card(name_on_card: str) -> Tuple[str, str]:
     Validate name on card.
 
     Requirements:
-    - Normalize input
+    - 
     - Collapse multiple spaces
     - Length between 2 and 60 characters
     - Only letters (including accents), spaces, apostrophes, hyphens
@@ -234,8 +234,18 @@ def validate_name_on_card(name_on_card: str) -> Tuple[str, str]:
     Returns:
         (normalized_name, error_message)
     """
-    # TODO: Implement validation
-    return "", ""
+    # Normalize input
+    normalized_name = normalize_basic(name_on_card)
+    # Collapse multiple spaces
+    normalized_name = re.sub(r"\s+", " ", normalized_name)
+    # Length check
+    if not (2 <= len(normalized_name) <= 60):
+        return "", "Name on card must be between 2 and 60 characters long"
+    # Character check
+    if not NAME_ALLOWED_RE.match(normalized_name):
+        return "", "Name on card contains invalid characters"
+
+    return normalized_name, ""
 
 
 # =============================
