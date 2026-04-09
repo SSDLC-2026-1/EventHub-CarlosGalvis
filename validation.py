@@ -1,29 +1,7 @@
-"""
-payment_validation.py
-
-Skeleton file for input validation exercise.
-You must implement each validation function according to the
-specification provided in the docstrings.
-
-All validation functions must return:
-
-    (clean_value, error_message)
-
-Where:
-    clean_value: normalized/validated value (or empty string if invalid)
-    error_message: empty string if valid, otherwise error description
-"""
-
 import re
 import unicodedata
 from datetime import datetime
-from typing import Tuple, Dict
-
-
-# =============================
-# Regular Patterns
-# =============================
-
+from typing import Dict, Tuple
 
 CARD_DIGITS_RE = re.compile(r"^\d+$")     # digits only
 CVV_RE = re.compile(r"^\d{3,4}$")             # 3 or 4 digits
@@ -252,28 +230,14 @@ def validate_name_on_card(name_on_card: str) -> Tuple[str, str]:
 # Orchestrator Function
 # =============================
 
-def validate_payment_form(
-    card_number: str,
-    exp_date: str,
-    cvv: str,
-    name_on_card: str,
-    billing_email: str
-) -> Tuple[Dict, Dict]:
-    """
-    Orchestrates all field validations.
-
-    Returns:
-        clean (dict)  -> sanitized values safe for storage/use
-        errors (dict) -> field_name -> error_message
-    """
-
+def validate_payment_form(card_number: str, exp_date: str, cvv: str, name_on_card: str, billing_email: str) -> Tuple[Dict, Dict]:
     clean = {}
     errors = {}
 
-    card, err = validate_card_number(card_number)
+    last4, err = validate_card_number(card_number)
     if err:
         errors["card_number"] = err
-    clean["card"] = card
+    clean["card_last4"] = last4
 
     exp_clean, err = validate_exp_date(exp_date)
     if err:
