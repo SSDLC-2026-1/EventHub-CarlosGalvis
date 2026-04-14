@@ -1,6 +1,6 @@
 # Name of this GitHub Actions workflow.
 name: Semgrep
-
+  # se hace el pip install detect-sectrets
 on:
   # Scan changed files in PRs (diff-aware scanning):
   pull_request: {}
